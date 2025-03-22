@@ -4,7 +4,8 @@
   "main": "app.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon -q pnpmapp.js"
+    "start": "nodemon -q app.js",
+    "dev":"sas"
   },
   "keywords": [],
   "author": "Ahmad Raza Siddiqi",
