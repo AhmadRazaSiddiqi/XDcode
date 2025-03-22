@@ -9,7 +9,7 @@ const app = express()
 
 dbConnection()
 app.use(cors({
-  origin:process.env.FRONTEND_URL, 
+  origin:"https://xdcode.vercel.app/", 
   credentials: true, 
 }))
 app.use(express.json())
