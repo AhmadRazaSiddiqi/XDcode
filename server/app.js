@@ -11,18 +11,26 @@ const app = express()
 
 dbConnection()
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: process.env.NODE_ENV === 'production' 
+    ? process.env.FRONTEND_URL 
+    : "http://localhost:5173",
   credentials: true, 
 }))
 app.use(express.json())
 app.use(cookieParser())
 app.use(express.urlencoded({ extended: true }));
-app.use("/user", route)
-app.use("/file", route)
-app.use(express.static(path.join(__dirname,"client/dist")))
-app.get('*',(_,res)=>{
-  res.sendFile(__dirname,"client","dist","index.html")
-})
+app.use("/api/user", route)
+app.use("/api/file", route)
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, "client/dist")))
+  app.get('*', (_, res) => {
+    res.sendFile(path.join(__dirname, "client", "dist", "index.html"))
+  })
+}
+
 app.listen(PORT, () => {
   console.log(`Server is running at ${PORT}`)
 })
+
+export default app
