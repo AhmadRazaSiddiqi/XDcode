@@ -18,10 +18,12 @@ export const login = async (req, res) => {
     const token = foundUser.generateToken();
 
     res.cookie("token", token, {
-      httpOnly: true, // ✅ Secure against XSS attacks
-      secure: true, // ✅ Required for cross-origin cookies in HTTPS
-      sameSite: "None", // ✅ Required for cross-origin authentication
-      maxAge: 3 * 24 * 60 * 60 * 1000
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+      path: "/",
+      domain: process.env.NODE_ENV === 'production' ? '.vercel.app' : undefined,
+      maxAge: 3 * 24 * 60 * 60 * 1000 // 3 days
     });
     
     

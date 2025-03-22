@@ -1,9 +1,17 @@
 import axios from "axios";
-const baseUrl=import.meta.env.VITE_API_URI
+const baseUrl = import.meta.env.VITE_API_URI;
+
+// Configure axios defaults
+axios.defaults.withCredentials = true;
 
 export const register = async (userData) => {
     try {
-        const response = await axios.post(`${baseUrl}user/register`, userData, { withCredentials: true });
+        const response = await axios.post(`${baseUrl}user/register`, userData, {
+            withCredentials: true,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
         return { success: response.data };
     } catch (error) {
         if(error.response) {
@@ -15,7 +23,12 @@ export const register = async (userData) => {
 
 export const login = async (userData) => {
     try {
-        const response = await axios.post(`${baseUrl}user/login`, userData, {withCredentials: true});
+        const response = await axios.post(`${baseUrl}user/login`, userData, {
+            withCredentials: true,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
         return { success: response.data };
     } catch (error) {
         if (error.response) {
@@ -26,4 +39,15 @@ export const login = async (userData) => {
     }
 }
 
-export default { register, login };
+export const logout = async () => {
+    try {
+        const response = await axios.post(`${baseUrl}user/logout`, {}, {
+            withCredentials: true
+        });
+        return { success: response.data };
+    } catch (error) {
+        return { error: "Logout failed" };
+    }
+}
+
+export default { register, login, logout };
