@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 8000
 const app = express()
 
 dbConnection()
-app.use(cors({  origin: "https://xdcode.vercel.app/",
+app.use(cors({  origin: "https://xdcode.vercel.app",
   credentials: true, 
 }))
 app.use(express.json())
