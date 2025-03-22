@@ -17,7 +17,9 @@ app.use(cookieParser())
 app.use(express.urlencoded({ extended: true }));
 app.use("/api/user", route)
 app.use("/api/file", route)
-
+app.get('/',(req,res)=>{
+  res.send("Server Is Running")
+})
 app.listen(PORT, () => {
   console.log(`Server is running at ${PORT}`)
 })
