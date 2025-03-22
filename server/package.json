@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "start": "nodemon -q app.js",
-    "dev":"sas"
+    "dev":"sas "
   },
   "keywords": [],
   "author": "Ahmad Raza Siddiqi",
