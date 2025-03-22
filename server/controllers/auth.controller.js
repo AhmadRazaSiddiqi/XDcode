@@ -18,11 +18,12 @@ export const login = async (req, res) => {
     const token = foundUser.generateToken();
 
     res.cookie("token", token, {
-      httpOnly: false,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'Lax',
-      maxAge: 3*24 * 60 * 60 * 1000
+      httpOnly: true, // ✅ Secure against XSS attacks
+      secure: true, // ✅ Required for cross-origin cookies in HTTPS
+      sameSite: "None", // ✅ Required for cross-origin authentication
+      maxAge: 3 * 24 * 60 * 60 * 1000
     });
+    
     
     return res.status(200).json({ 
       success: true, 
